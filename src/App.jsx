@@ -5,21 +5,12 @@ import AdminDashboard from "./components/admin/AdminDashboard"
 import {queryClient} from './utils/htttps'
 import NewsList from "./components/users/NewsList"
 import NewsDetails from "./components/users/NewsDetails"
-import SignupForm from "./components/auth/Signup"
-import LoginForm from "./components/auth/Login"
+
 function App() {
     const  router = createBrowserRouter([
       {
         path: '/',
-        element: <Navigate to={'/user/login'} />
-      },
-      {
-        path: '/user/login',
-        element: <LoginForm />
-      },
-      {
-        path: '/user/signup',
-        element: <SignupForm />
+        element: <Navigate to={'/news-list'} />
       },
       {
         path: '/news-list',
