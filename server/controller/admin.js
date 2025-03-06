@@ -46,7 +46,6 @@ exports.postNews = async (req, res) => {
             author,
             source,
             images,
-            userId: req.user._id, // Add the authenticated user's ID
             tags: tagsMap
         })
 

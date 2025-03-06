@@ -49,12 +49,6 @@ export default function NewsList() {
     <div className="container mx-auto px-4 py-6">
      <div className=" flex justify-between items-center">
         <h1 className="text-3xl font-bold mb-6 text-center">Latest News</h1>
-        <div className=" flex justify-center items-center gap-2.5 mb-3.5">
-          <p>See all tags</p>
-          <button onClick={handleLogout}  className="mt-3 bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition">
-              {isPending ? "Loging out...": "Logout"}
-          </button>
-        </div>
      </div>
       <InfiniteScroll
         dataLength={news.length}

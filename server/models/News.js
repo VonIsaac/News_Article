@@ -37,7 +37,10 @@ const NewsSchema = new mongoose.Schema({
         default: 0,
         min: 0  // Ensure the value is not negative
     },  
-    userId: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true }, // Ensure this field exists
+    /* userId: {
+         type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },*/
+         
+         // Ensure this field exists
     tags:[
         {
             type: mongoose.Schema.Types.ObjectId, // Reference to the Tag model

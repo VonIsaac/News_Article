@@ -62,25 +62,20 @@ const getNewsPages = async (pageNews) => {
 
 // adding a news data
 const postNews = async (newsData) => {
-    try {
-        const token = localStorage.getItem("token"); // Retrieve token from localStorage (or another method)
-        if (!token) throw new Error("No authentication token found");
-
-        const response = await API.post('/news/create-news', newsData, {
-            headers: {
-                Authorization: `Bearer ${token}`, // Include the token in the request
-            },
-        });
-
-        console.log(response.data);
-        return response.data;
-    } catch (err) {
+    try{
+        const response = await API.post('/news/create-news', newsData)
+        console.log(response.data)
+        return response.data
+    }catch(err){
         if (err.response && err.response.data) {
-            throw new Error(err.response.data.message || "Posting News Failed");
+            //alert("Invalid Credentials");
+            throw new Error(err.response.data.message || 'Posting News Failed');
+            
         }
+
         throw err;
     }
-};
+}
 
 const signUp = async (data) => {
     try{
@@ -152,9 +147,9 @@ const postLogOut = async () => {
     }
 }
 
-const likeNews = async ({newsId, userId, likeType}) => {
+const likeNews = async ({newsId,  likeType}) => {
     try{
-        const response = await API.post(`/user-news/like-dislike/${newsId}`, {userId, likeType}) 
+        const response = await API.post(`/user-news/like-dislike/${newsId}`, {likeType}) 
         return response.data
     }catch(err){
         console.log(err )

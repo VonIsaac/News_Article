@@ -43,7 +43,7 @@ export default function NewsDetails() {
 
         <div className=" flex justify-between items-center">
           <a href="/" className="mt-4 inline-block text-blue-600 hover:underline">Back to News</a>
-            <NewsLike newsId={news._id}  userId={news.userId} initialDislike={news.dislike}  initialLike={news.like}  />
+            <NewsLike newsId={news._id}   initialDislike={news.dislike}  initialLike={news.like}  />
         </div>
       </div>
     </div>

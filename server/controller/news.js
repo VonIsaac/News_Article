@@ -1,6 +1,7 @@
 const News = require('../models/News');
 const Tag = require('../models/Tag')
-const Like = require('../models/Like')
+const Like = require('../models/Like');
+const View = require('../models/View')
 // getting the new
 exports.getNews = async (req, res) => {
 
@@ -51,13 +52,16 @@ exports.getNewsByPages = async (req, res) => {
 exports.getNewsById = async (req, res) => {
     try{
         const {id} = req.params
-        const findNewsById = await News.findById(id)
+        const findNewsById = await News.findById(id) 
+
         .populate("tags", "name"); // use populate to get the tags and name 
         console.log(findNewsById)
+
         if (!findNewsById) {
             return res.status(404).json({ error: "News article not found" });
           }
-        res.status(200).json({findNewsById})
+
+        res.status(200).json({findNewsById,   })
     }catch(err){
         console.error("Error fetching news:", err);
         return res.status(500).json({ error: "Failed to get news by id . Please try again." });
@@ -103,7 +107,7 @@ exports.getNewsByTag = async (req, res) => {
 exports.toggleLikeAndDislike = async (req, res) => {
   try {
     const { newsId } = req.params;
-    const { likeType, userId } = req.body; //  and likeType should be sent in the request body
+    const { likeType  } = req.body; //  and likeType should be sent in the request body
 
     // Check if likeType is valid
     if (!["like", "dislike"].includes(likeType)) {
@@ -113,7 +117,7 @@ exports.toggleLikeAndDislike = async (req, res) => {
     }
 
     // Check if the user already liked/disliked this news
-    let existingLike = await Like.findOne({ newsId, userId });
+    let existingLike = await Like.findOne({ newsId  });
 
     if (existingLike) {
       if (existingLike.likeType === likeType) {
@@ -141,7 +145,7 @@ exports.toggleLikeAndDislike = async (req, res) => {
       }
     } else {
       // If no previous like/dislike, add a new entry
-      const newLike = new Like({ newsId,  likeType, userId });
+      const newLike = new Like({ newsId,  likeType });
       await newLike.save();
 
       const updateField =

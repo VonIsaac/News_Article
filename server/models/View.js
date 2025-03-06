@@ -7,16 +7,9 @@ const ViewSchema = new mongoose.Schema(
       ref: "News",
       required: true,
     },
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-      default: null, // Allows anonymous users to view
-    },
     ipAddress: {
       type: String,
-      required: function () {
-        return !this.userId;
-      }, // Require IP if user is not logged in
+      required: true, // Store the visitor's IP to track unique views if needed
     },
     viewedAt: {
       type: Date,
@@ -27,7 +20,7 @@ const ViewSchema = new mongoose.Schema(
 );
 
 // 🔹 Prevent duplicate views per user/IP
-ViewSchema.index({ newsId: 1, userId: 1 }, { unique: true, sparse: true });
-ViewSchema.index({ newsId: 1, ipAddress: 1 }, { unique: true, sparse: true });
+
+
 
 module.exports = mongoose.model("View", ViewSchema);
