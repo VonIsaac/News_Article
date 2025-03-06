@@ -1,0 +1,9 @@
+// implementing this web application 
+
+1. implementing the backend first.
+ - login (admin, user)
+ - news
+ - like 
+ - veiw
+ - news
+ 
