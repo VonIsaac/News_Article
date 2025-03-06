@@ -77,65 +77,7 @@ const postNews = async (newsData) => {
     }
 }
 
-const signUp = async (data) => {
-    try{
-        const response = await API.post('/user/signup', data)
-        console.log(response);
-     
-        //alert("Account Created");
-        return response.data;
-    }catch(err){
-        if (err.response && err.response.data) {
-            //alert("Invalid Credentials");
-            throw new Error(err.response.data.message || 'Login failed');
-            
-        }
 
-        throw err;
-    }
-}
-
-const userLogin = async (data) => {
-    try{
-        const response = await API.post('/user/login', data)
-        if(response.ok){
-            console.log(response)
-        }
-
-        const {token} = response.data;
-        console.log(token)
-        Cookies.set("token", token, { 
-            expires: 1 / 24, // Expires in 1 hour, secure for HTTPS, and sameSite set to Strict
-            secure: true, 
-            sameSite: "Strict" 
-        });
-        const decoded = jwtDecode(token); // use jwt-decode to decode the token
-        console.log(decoded); // Log the decoded token
-        // set the role 
-        Cookies.set('role', decoded.role,{
-            expires: 1 / 24,
-            secure: true,
-            sameSite: 'Strict'
-        })
-
-        console.log(Cookies.get("token")); // Log token to verify it's stored*/
-        return token
-
-    }catch(err){ 
-        console.log(err);
-        //return { success: false, message: err.response?.data?.message || "Login failed" };
-        //check if credentials is invalid
-        if (err.response && err.response.data) {
-            //alert("Invalid Credentials");
-            throw new Error(err.response.data.message || 'Login failed');
-            
-        }
-
-        throw err;
-    }
-};
-
-// handle to logout credentials 
 
 const postLogOut = async () => {
     try{
@@ -162,8 +104,6 @@ export{
     deleteNews,
     getNewsPages,
     postNews,
-    signUp,
-    userLogin,
     postLogOut,
     likeNews,
 }
