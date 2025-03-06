@@ -42,7 +42,6 @@ mongoConnect();
 createAdminAccout()
 app.use('/user-news', newsRoutes); // news routes
 app.use('/news', adminRoutes); // admin routes
-app.use('/user', userRoutes); // user routes
 
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
